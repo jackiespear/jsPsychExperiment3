@@ -1,6 +1,6 @@
 studywords = [
     {
-        "stimulus1":"CAT",
+        "stimulus1":"<p style='font-size: 48px;'>CAT</p>","data":{"type":"old","category":"music","word":"CAT"},
         "stimulus2":"DOG",
         "stimulus3":"RAT",
         "stimulus4":"TABLE",
