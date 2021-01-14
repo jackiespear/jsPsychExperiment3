@@ -144,8 +144,44 @@ var instructions = {
     }
   },
 };
-
-//Present the study words
+   
+// CUSTOM SHUFFLE FUNCTION
+// SHUFFLES ALL BUT THE LAST ITEM
+function shuffle_all_but_last(a1){
+  last = a1.pop();
+  a1 = jsPsych.randomization.repeat(a1,1);
+  a1.push(last);
+  return(a1);
+}    
+    
+// EXPERIMENTAL PHASE
+var study_phase = {
+  type: 'html-keyboard-response',
+  choices: jsPsych.NO_KEYS,
+  trial_duration: 1000,
+  post_trial_gap: 500,
+  timeline_variables: studywords,
+  timeline: 
+// USE THE CUSTOM FUNCTION TO SHUFFLE WORDS WITHIN A LIST
+ shuffle_all_but_last([
+    {stimulus: jsPsych.timelineVariable('stimulus1')},
+    {stimulus: jsPsych.timelineVariable('stimulus2')},
+    {stimulus: jsPsych.timelineVariable('stimulus3')},
+    {stimulus: jsPsych.timelineVariable('stimulus4')},
+// LAST ITEM IS YOUR TEST WORD AND CHANGE PARAMETERS FOR THE TEST
+    {choices: ["x","o"], trial_duration: 20000, prompt: "Press x for new and o for old", stimulus: jsPsych.timelineVariable('test')},    
+  ]),
+ // THIS RANDOMIZES THE ORDER OF THE LISTS OF WORDS
+  randomize_order: true,
+ // NOT IMPORTANT, JUST FOR TESTING
+  on_start: function(data){
+    console.log(shuffle_all_but_last([{"test":'now'},{"test":'then'},{"test":'this'},{"test":'last'}]));
+  }
+}    
+    
+    
+    
+/*Present the study words
 var study_phase = {
     timeline: [
         {
@@ -182,22 +218,8 @@ for (var i in testwords){
     post_trial_gap: 500, // like a blank 500
     data: {phase: 'testphase'}
   } ),
-};
+}; */
 
-/*Present the test words
-var test_phase = {
-    timeline: [
-        {
-            type: 'html-keyboard-response',
-            stimulus: jsPsych.timelineVariable('testwords'),
-            choices: ['y', 'n'],
-            response_ends_trial: true,
-            trial_duration: 2000, // words will appear for 2 seconds
-            post_trial_gap: 500 // like a blank 500
-        }
-    ],
-};
-*/
 
 // set up debrief block
 var debrief = {
