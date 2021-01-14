@@ -4,16 +4,19 @@
         <title>Recognition Experiment</title>
         <meta name="author" content="Jackie Spear"/>
         <meta name="description" content="A psychology recognition memory experiment"/>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <script src="jspsych-6.1.0/jspsych.js"></script>
         <script src="jspsych-6.1.0/plugins/jspsych-html-keyboard-response.js"></script>
-        <script src="jspsych-6-2/plugins/jspsych-external-html.js"></script>
-        <script src="jspsych-6-2/plugins/jspsych-fullscreen.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-external-html.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-survey-text.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-fullscreen.js"></script>
         <script src='stimuli/exp_text.js'></script>
         <script src='stimuli/study_words.js'></script>
-        
+        <script src='stimuli/test_words.js'></script>
         <link href="jspsych-6.1.0/css/jspsych.css" rel="stylesheet" type="text/css"></link>
     </head>
     <body></body>
+    
 
 <!-- Allow remote storage on Google Firebase -->
 <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -22,6 +25,8 @@
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
 <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
 
 <!-- enter some javascript code-->
 <script type="text/javascript">
@@ -67,13 +72,55 @@
   }
   // ...
 });
+
 </script>
 
+<!-- enter javascript code -->
+<script type="text/javascript">
+/* Note this is a js (javascript) code chunk */
 
-<script>
+
+// #######################################
+//  set up custom functions for experiment
+// #######################################
+
+// function to check if in fullscreen mode
+  function is_fullscreen(){
+  // check if in fullscreen mode
+  if(window.innerWidth == screen.width && window.innerHeight == screen.height){
+    return true;
+  }else{return false}
+  }
+
+// function to extract data from URL variables
+  function getUrlVars() { // #SONA
+    var vars = {}; // #SONA
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(m,key,value) { // #SONA
+        vars[key] = value; // #SONA
+    }); // #SONA
+    return vars; // #SONA
+  } // #SONA
+
+// function to go find data in the URL
+// should be provided a defualt (e.g., "") so that there will be no errors thrown
+  function getUrlParam(parameter, defaultvalue){ // #SONA
+    var urlparameter = defaultvalue; // #SONA
+    if(window.location.href.indexOf(parameter) > -1){ // #SONA
+        urlparameter = getUrlVars()[parameter]; // #SONA
+        } // #SONA
+    return urlparameter; // #SONA
+  }
+
+
+
+
+
+//<script>
 
 /* experiment parameters */
+
 // generate a random subject ID with 15 characters
+
 var subject_id = jsPsych.randomization.randomID(15);
 
 // get the id number for the SONA participant so that we can grant credits automatically
@@ -87,6 +134,7 @@ jsPsych.data.addProperties({
   subject: subject_id,
   StartTime: start_time,
 });
+
 
 // set up consent procedure
 var consent = {
@@ -274,8 +322,8 @@ var no_consent = {
 
 /*set up experiment structure*/
 var timeline = [];
-timeline.push(consent);
-timeline.push(no_consent);
+//timeline.push(consent); 
+//timeline.push(no_consent);
 timeline.push(welcome);
 timeline.push(enter_full_screen);
 timeline.push(instructions);
@@ -286,6 +334,8 @@ timeline.push(exit_full_screen);
 timeline.push(debrief);
 
 /*start experiment*/
+
+
 jsPsych.init({
     timeline: timeline,
     on_finish: function() {
@@ -294,6 +344,7 @@ jsPsych.init({
       //jsPsych.data.displayData();
     }
 });
+
 
   </script>
   </html>
