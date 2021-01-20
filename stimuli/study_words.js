@@ -171,7 +171,7 @@ studywords = [
 "stimulus2":"<p style='font-size: 48px;'>CRUISE</p>","data":{"type":"old","category":"boat","word":"CRUISE"},
 "stimulus3":"<p style='font-size: 48px;'>YACHT</p>","data":{"type":"old","category":"boat","word":"YACHT"},
 "stimulus4":"<p style='font-size: 48px;'>ABLE</p>","data":{"type":"distinct","category":"boat","word":"ABLE"},
-"test":"<p style='font-size: 48px;'>ABLE/p>","data":{"type":"old","category":"boat","test_type":"distinct_test","word":"ABLE"}
+"test":"<p style='font-size: 48px;'>ABLE</p>","data":{"type":"old","category":"boat","test_type":"distinct_test","word":"ABLE"}
 },
 {"stimulus1":"<p style='font-size: 48px;'>FLY</p>","data":{"type":"old","category":"insect","word":"FLY"},
 "stimulus2":"<p style='font-size: 48px;'>ANT</p>","data":{"type":"old","category":"insect","word":"ANT"},
