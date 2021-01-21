@@ -195,13 +195,13 @@ var instructions = {
 };
    
 // CUSTOM SHUFFLE FUNCTION
-// SHUFFLES ALL BUT THE LAST ITEM
+// SHUFFLES ALL BUT THE LAST ITEM AND SECOND LAST 'ITEM'
 function shuffle_all_but_last(a1){
   last = a1.pop(); // taking the last item off of the list (the test item)
   last2 = a1.pop(); // taking the second last item off of the list (the blank trial)
   a1 = jsPsych.randomization.repeat(a1,1);
   a1.push(last2); // presenting/adding the second last item back onto the list
-  a1.push(last); // presenting/adding the last item back onto the list
+  a1.push(last); // presenting/adding the last item back onto the list, the test word
   return(a1);
 }    
     
@@ -226,9 +226,9 @@ var study_phase = {
  // THIS RANDOMIZES THE ORDER OF THE LISTS OF WORDS
   randomize_order: true,
  // NOT IMPORTANT, JUST FOR TESTING
-  on_start: function(data){
-    console.log(shuffle_all_but_last([{"test":'now'},{"test":'then'},{"test":'this'},{"test":'last'}]));
-  }
+ on_start: function(trial){
+    trial.timeline = shuffle_all_but_last(trial.timeline)
+},
 }    
     
 
