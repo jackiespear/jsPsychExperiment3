@@ -196,9 +196,11 @@ var instructions = {
 // CUSTOM SHUFFLE FUNCTION
 // SHUFFLES ALL BUT THE LAST ITEM
 function shuffle_all_but_last(a1){
-  last = a1.pop();
+  last = a1.pop(); // taking the last item off of the list (the test item)
+  last2 = a1.pop(); // taking the second last item off of the list (the blank trial)
   a1 = jsPsych.randomization.repeat(a1,1);
-  a1.push(last);
+  a1.push(last2); // presenting/adding the second last item back onto the list
+  a1.push(last); // presenting/adding the last item back onto the list
   return(a1);
 }    
     
@@ -216,7 +218,8 @@ var study_phase = {
     {stimulus: jsPsych.timelineVariable('stimulus2')},
     {stimulus: jsPsych.timelineVariable('stimulus3')},
     {stimulus: jsPsych.timelineVariable('stimulus4')},
-// LAST ITEM IS YOUR TEST WORD AND CHANGE PARAMETERS FOR THE TEST
+// LAST ITEM IS THE TEST WORD AND CHANGE PARAMETERS FOR THE TEST
+    {stimulus: (" ")}, // creating a blank trial so there is a 2 second gap between study and test
     {choices: ["y","n"], trial_duration: 30000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test')},    
   ]),
  // THIS RANDOMIZES THE ORDER OF THE LISTS OF WORDS
@@ -227,46 +230,6 @@ var study_phase = {
   }
 }    
     
-    
-    
-/*Present the study words
-var study_phase = {
-    timeline: [
-        {
-            type: 'html-keyboard-response',
-            stimulus: jsPsych.timelineVariable('studywords'),
-            choices: jsPsych.NO_KEYS,
-            data: {"phase": "studyphase",
-            trial_duration: 2000, // words will appear for 2 seconds
-            post_trial_gap: 500 // like a blank 500
-        }
-    ],
-    randomize_order: true
-};
-
-//test phase instructions presented after study phase is over
-var test_instructions = {
-  type: "html-keyboard-response",
-  stimulus: test_instruction_text,
-  choices: ['i'],
-  data: {"phase": "Test_Instructions",
-},
-};
-
-//Present the test words
-var test_phase = [];
-for (var i in testwords){
-  test_phase.push({
-    type: 'html-keyboard-response',
-    stimulus: ['<p style="text-algin:center; font-size:32px;">'+testwords[i]+'</p>'],
-    choices: ['y', 'n'],
-    is_html: true,
-    response_ends_trial:true,
-    trial_duration: 2000, // words will appear for 2 seconds
-    post_trial_gap: 500, // like a blank 500
-    data: {phase: 'testphase'}
-  } ),
-}; */
 
 
 // set up debrief block
