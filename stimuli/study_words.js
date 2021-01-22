@@ -1,9 +1,9 @@
 studywords = [
-{"stimulus1":"<p style='font-size: 48px;'>EAGLE</p>","data":{"type":"old","category":"birds","word":"EAGLE"},
-"stimulus2":"<p style='font-size: 48px;'>ROBIN</p>","data":{"type":"old","category":"birds","word":"ROBIN"},
-"stimulus3":"<p style='font-size: 48px;'>BLUEJAY</p>","data":{"type":"old","category":"birds","word":"BLUEJAY"},
-"stimulus4":"<p style='font-size: 48px;'>CONCEPT</p>","data":{"type":"distinct","category":"birds","word":"CONCEPT"},
-"test":"<p style='font-size: 48px;'>EAGLE</p>","data":{"type":"old","category":"birds","test_type":"cat_test","word":"EAGLE"}
+{{"stimulus1":"<p style='font-size: 48px;'>EAGLE</p>","data":{"type":"old","category":"birds","word":"EAGLE"}},
+{"stimulus2":"<p style='font-size: 48px;'>ROBIN</p>","data":{"type":"old","category":"birds","word":"ROBIN"}},
+{"stimulus3":"<p style='font-size: 48px;'>BLUEJAY</p>","data":{"type":"old","category":"birds","word":"BLUEJAY"}},
+{"stimulus4":"<p style='font-size: 48px;'>CONCEPT</p>","data":{"type":"distinct","category":"birds","word":"CONCEPT"}},
+{"test":"<p style='font-size: 48px;'>EAGLE</p>","data":{"type":"old","category":"birds","test_type":"cat_test","word":"EAGLE"}}
 },
 {"stimulus1":"<p style='font-size: 48px;'>BLUE</p>","data":{"type":"old","category":"colors","word":"BLUE"},
 "stimulus2":"<p style='font-size: 48px;'>RED</p>","data":{"type":"old","category":"colors","word":"RED"},
