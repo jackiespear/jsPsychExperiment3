@@ -194,7 +194,7 @@ var instructions = {
   },
 };
    
-// CUSTOM SHUFFLE FUNCTION
+/*// CUSTOM SHUFFLE FUNCTION
 // SHUFFLES ALL BUT THE LAST ITEM AND SECOND LAST 'ITEM'
 function shuffle_all_but_last(a1){
   last = a1.pop(); // taking the last item off of the list (the test item)
@@ -204,7 +204,26 @@ function shuffle_all_but_last(a1){
   a1.push(last); // presenting/adding the last item back onto the list, the test word
   return(a1);
 }    
-    
+ */   
+
+ // CUSTOM SHUFFLE FUNCTION
+function shuffle_variable(studywords_list){
+  for(i=0; i<studywords_list.length; i++){ //for every trial
+    W1 = studywords_list[i].stimulus1; // save the 4 words
+    W2 = studywords_list[i].stimulus2;
+    W3 = studywords_list[i].stimulus3;
+    W4 = studywords_list[i].stimulus4;
+    WL = [W1,W2,W3,W4]; // put words in a list
+    WL = jsPsych.randomization.repeat(WL,1); // randomize the list
+    studywords_list[i].stimulus1 = WL[0]; // replace words in actual variable
+    studywords_list[i].stimulus2 = WL[1];
+    studywords_list[i].stimulus3 = WL[2];
+    studywords_list[i].stimulus4 = WL[3];
+  }
+  return(studywords_list) // return that list to the variable
+}
+studywords=shuffle_variable(studywords); // this will use the above function and shuffle the words that you want shuffled
+
 // EXPERIMENTAL PHASE
 var study_phase = {
   type: 'html-keyboard-response',
@@ -213,7 +232,7 @@ var study_phase = {
   post_trial_gap: 500,
   timeline_variables: studywords,
   timeline: 
-// USE THE CUSTOM FUNCTION TO SHUFFLE WORDS WITHIN A LIST
+/* USE THE CUSTOM FUNCTION TO SHUFFLE WORDS WITHIN A LIST
  shuffle_all_but_last([
     {stimulus: jsPsych.timelineVariable('stimulus1')},
     {stimulus: jsPsych.timelineVariable('stimulus2')},
@@ -221,15 +240,29 @@ var study_phase = {
     {stimulus: jsPsych.timelineVariable('stimulus4')},
 // LAST ITEM IS THE TEST WORD AND CHANGE PARAMETERS FOR THE TEST
     {stimulus: (" ")}, // creating a blank trial so there is a 2 second gap between study and test
-    {choices: ["y","n"], trial_duration: 30000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test')},    
+    {choices: ["y","n"], trial_duration: 30000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test')},  
   ]),
+  */
+
+// just in normal order now
+[
+    {stimulus: jsPsych.timelineVariable('stimulus1')},
+    {stimulus: jsPsych.timelineVariable('stimulus2')},
+    {stimulus: jsPsych.timelineVariable('stimulus3')},
+    {stimulus: jsPsych.timelineVariable('stimulus4')},
+    {stimulus: (" ")},
+    {choices: ["y","n"], trial_duration: 30000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test')},
+ ],
+
  // THIS RANDOMIZES THE ORDER OF THE LISTS OF WORDS
   randomize_order: true,
  // NOT IMPORTANT, JUST FOR TESTING
- on_start: function(trial){
-    trial.timeline = shuffle_all_but_last(trial.timeline)
+ on_finish: function(data){
+   //console.log(data);
+   //shuffle_variable(studywords)
+   //trial.timeline = shuffle_all_but_last(trial.timeline)
 },
-}    
+}
     
 
 
