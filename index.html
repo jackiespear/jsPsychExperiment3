@@ -228,9 +228,10 @@ studywords=shuffle_variable(studywords); // this will use the above function and
 var study_phase = {
   type: 'html-keyboard-response',
   choices: jsPsych.NO_KEYS,
+  data: {"phase": "testphase"},
   trial_duration: 1000,
   post_trial_gap: 500,
-  timeline_variables: studywords,
+  timeline_variables: studywords, //calling studywords variable
   timeline: 
 /* USE THE CUSTOM FUNCTION TO SHUFFLE WORDS WITHIN A LIST
  shuffle_all_but_last([
